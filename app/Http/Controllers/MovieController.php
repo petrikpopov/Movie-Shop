@@ -66,4 +66,12 @@ class MovieController extends Controller
             session()->flash('success', 'Movie successfully deleted.');
         }
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query'); 
+        $movies = Movie::where('name', 'like', '%' . $query . '%')->get();
+        return view('search', compact('movies', 'query'));
+    }
+
 }
